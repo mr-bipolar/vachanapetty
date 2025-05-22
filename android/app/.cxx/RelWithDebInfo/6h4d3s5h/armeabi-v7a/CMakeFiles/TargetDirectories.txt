@@ -1,0 +1,2 @@
+/mnt/fastdrive/FlutterProjects/vachanapetty/android/app/.cxx/RelWithDebInfo/6h4d3s5h/armeabi-v7a/CMakeFiles/edit_cache.dir
+/mnt/fastdrive/FlutterProjects/vachanapetty/android/app/.cxx/RelWithDebInfo/6h4d3s5h/armeabi-v7a/CMakeFiles/rebuild_cache.dir
