@@ -32,7 +32,7 @@ A modern Flutter application built with clean UI and BLoC architecture.
 
 ## 📸 Screenshots
 
-<img src="/screenshots/1.jpg" width="300px"/> <img src="/screenshots/2.jpg" width="300px"/> <img src="/screenshots/3.jpg" width="300px"/> 
+<img src="/screenshots/1.jpg" width="200px"/> <img src="/screenshots/2.jpg" width="200px"/> <img src="/screenshots/3.jpg" width="200px"/> 
 
 ---
 
