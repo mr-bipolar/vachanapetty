@@ -1,4 +1,4 @@
-package com.example.vachanapetty
+package com.aaronmaxlab.vachanapetty
 
 import io.flutter.embedding.android.FlutterActivity
 

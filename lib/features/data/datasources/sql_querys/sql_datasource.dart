@@ -1,9 +1,7 @@
-import 'package:dartz/dartz.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:vachanapetty/config/errors/failures.dart';
-import 'package:vachanapetty/features/domain/entities/quotes_data.dart';
+import 'package:vachanapetty/features/data/models/quotes_datamodel.dart';
 
 abstract class SqlDatasource {
-  Future<Database> intializedatabase();
-  Future<Either<Failures, QuotesData>> getrandomdata();
+  Future<Database> initializeDatabase();
+  Future<List<QuotesDataModel>> fetchData();
 }

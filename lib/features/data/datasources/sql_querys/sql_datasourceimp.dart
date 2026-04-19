@@ -1,31 +1,25 @@
 import 'dart:io';
-import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:vachanapetty/config/errors/failures.dart';
 import 'package:vachanapetty/features/data/datasources/sql_querys/sql_datasource.dart';
-import 'package:vachanapetty/features/data/models/quotes_dto.dart';
-import 'package:vachanapetty/features/domain/entities/quotes_data.dart';
+import 'package:vachanapetty/features/data/models/quotes_datamodel.dart';
 
 class SqlDatasourceimp extends SqlDatasource {
   // ? db name
   static const _dbName = "quotes.db";
   // ? query
-  static const _dataQuery = '''
-          SELECT * From quotes 
-          ORDER by random() 
-          LIMIT 1 ''';
+  static const _fetchQuery = 'SELECT * From quotes';
 
   @override
-  Future<Database> intializedatabase() async {
+  Future<Database> initializeDatabase() async {
     final databasePath = await getDatabasesPath();
     final path = join(databasePath, "quotes.db");
-    //! check db exist or not
+    // check db exist or not
     final exists = await databaseExists(path);
     if (!exists) {
-      //! Check directory exists
+      // Check directory exists
       try {
         await Directory(dirname(path)).create(recursive: true);
       } catch (_) {}
@@ -40,23 +34,21 @@ class SqlDatasourceimp extends SqlDatasource {
     return await openDatabase(path, readOnly: true);
   }
 
-  //* Random quotes from db
   @override
-  Future<Either<Failures, QuotesData>> getrandomdata() async {
+  Future<List<QuotesDataModel>> fetchData() async {
     try {
-      final db = await intializedatabase();
-      const String query = _dataQuery;
-      List<Map<String, dynamic>> quotesData = await db.rawQuery(query);
+      final db = await initializeDatabase();
+      const String query = _fetchQuery;
+
+      final List<Map<String, dynamic>> quotesData = await db.rawQuery(query);
+
       if (quotesData.isNotEmpty) {
-        final quote = QuotesDto.fromMap(quotesData.first).toEntity();
-        return right(quote);
-      } else {
-        return left(
-            const Failures.clientfailure(errorMessage: "No data found."));
+        return quotesData.map((e) => QuotesDataModel.fromMap(e)).toList();
       }
-    } catch (e) {
-      return const Left(
-          Failures.serverfailure(errorMessage: "Error occurred. Try again."));
+      return <QuotesDataModel>[];
+    } catch (e, stack) {
+      debugPrint("fetchData error: $e\n$stack");
+      return <QuotesDataModel>[];
     }
   }
 }

@@ -8,8 +8,12 @@ import 'package:vachanapetty/features/presentation/pages/splash_screen/splash_sc
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Colors.black, systemNavigationBarColor: Colors.black));
+    statusBarBrightness: Brightness.light,
+    systemNavigationBarContrastEnforced: false,
+  ));
+
   await init();
   runApp(BlocProvider(
     create: (context) => di<QuotesBloc>(),
