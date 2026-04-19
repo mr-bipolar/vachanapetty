@@ -1,16 +1,46 @@
-# vachanapetty
 
-A new Flutter project.
+# 📱 Vachanapetty
 
-## Getting Started
+A modern Flutter application built with clean UI and BLoC architecture.  
+🚀 Now available on Google Play Store!
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## 📥 Download
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+[<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="80">](https://play.google.com/store/apps/details?id=com.aaronmaxlab.vachanapetty)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+---
+
+## ✨ Features
+
+- 🎨 Smart UI Design
+- ⚡ BLoC State Management
+- 📱 Smooth performance
+- 🔐 Secure configuration
+- 💾 Local data storage using SQLite
+---
+
+## 🛠️ Tech Stack
+
+- Flutter
+- Dart
+- BLoC Pattern
+- SQLite
+---
+
+## 📸 Screenshots
+
+<img src="/screenshots/1.jpg" width="300px"/> <img src="/screenshots/2.jpg" width="300px"/> <img src="/screenshots/3.jpg" width="300px"/> 
+
+---
+
+## ▶️ Getting Started
+
+```bash
+git clone https://github.com/mr-bipolar/vachanapetty.git
+cd vachanapetty
+flutter pub get
+flutter run
+
