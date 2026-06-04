@@ -45,34 +45,3 @@ git clone https://github.com/mr-bipolar/vachanapetty.git
 cd vachanapetty
 flutter pub get
 flutter run
-
-
-
-
----
-
-## ✨ Features
-
-- 🎨 Smart UI Design
-- ⚡ BLoC State Management
-- 📱 Smooth performance
-- 🔐 Secure configuration
-
----
-
-## 🛠️ Tech Stack
-
-- Flutter
-- Dart
-- BLoC Pattern
-
----
-
-## ▶️ Getting Started
-
-```bash
-git clone https://github.com/mr-bipolar/vachanapetty.git
-cd vachanapetty
-flutter pub get
-flutter run
-
