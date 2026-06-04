@@ -1,6 +1,5 @@
 plugins {
     id "com.android.application"
-    id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
 }
 
@@ -32,7 +31,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace "com.aaronmaxlab.vachanapetty"
-    compileSdkVersion 36
+    compileSdkVersion 37
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -40,9 +39,6 @@ android {
         targetCompatibility  JavaVersion.VERSION_11
     }
 
-    kotlinOptions {
-        jvmTarget =  JavaVersion.VERSION_11.toString()
-    }
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -74,11 +70,17 @@ android {
     }
 }
 
+kotlin {
+    compilerOptions {
+        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11
+    }
+}
+
 flutter {
     source '../..'
 }
 
 dependencies {
-    implementation 'com.google.android.material:material:1.13.0'
+    implementation 'com.google.android.material:material:1.14.0'
     implementation 'com.android.support:multidex:2.0.1'
 }

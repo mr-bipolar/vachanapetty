@@ -11,13 +11,12 @@ class SqlRepositoryImpl implements SqlRepository {
 
   SqlRepositoryImpl({required this.datasource});
   @override
-  Future<Either<Failures, List<QuotesDataEntity>>> fetchData() async {
+  Future<Either<Failures, QuotesDataEntity>> fetchData({int? bookId}) async {
     try {
-      final response = await datasource.fetchData(); // returns List<QuotesData>
+      final response = await datasource.fetchData(bookId: bookId); //
 
-      if (response.isNotEmpty) {
-        final entityList = response.map((e) => e.toEntity()).toList();
-        return right(entityList);
+      if (response != null) {
+        return right(response.toEntity());
       }
 
       return left(

@@ -33,7 +33,8 @@ A modern Flutter application built with clean UI and BLoC architecture.
 
 ## 📸 Screenshots
 
-<img src="/screenshots/1.jpg" width="200px"/> <img src="/screenshots/2.jpg" width="200px"/> <img src="/screenshots/3.jpg" width="200px"/> 
+<img src="/screenshots/1.png" width="200px"/> <img src="/screenshots/2.png" width="200px"/> <img src="/screenshots/3.png" width="200px"/> <img src="/screenshots/4.png" width="350px"/> 
+<img src="/screenshots/5.png" width="350px"/> 
 
 ---
 
@@ -69,10 +70,11 @@ flutter run
 
 ## 📸 Screenshots
 
-<img src="/screenshots/1.jpg" width="350px"/> 
-<img src="/screenshots/2.jpg" width="350px"/> 
-<img src="/screenshots/3.jpg" width="350px"/> 
-
+<img src="/screenshots/1.png" width="350px"/> 
+<img src="/screenshots/2.png" width="350px"/> 
+<img src="/screenshots/3.png" width="350px"/> 
+<img src="/screenshots/4.png" width="350px"/> 
+<img src="/screenshots/5.png" width="350px"/> 
 ---
 
 ## ▶️ Getting Started

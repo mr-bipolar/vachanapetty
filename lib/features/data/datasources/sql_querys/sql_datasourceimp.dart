@@ -8,22 +8,37 @@ import 'package:vachanapetty/features/data/models/quotes_datamodel.dart';
 
 class SqlDatasourceimp extends SqlDatasource {
   // ? db name
-  static const _dbName = "quotes.db";
-  // ? query
-  static const _fetchQuery = 'SELECT * From quotes';
+  static const _dbName = "vachanapetty.db";
+
+  // ? queries
+  static const _fetchAllQuery = '''
+    SELECT v.*, b.name_en, b.name_ml 
+    FROM verses v 
+    JOIN books b ON v.book_id = b.id 
+    ORDER BY RANDOM() 
+    LIMIT 1
+  ''';
+
+  static const _fetchByBookQuery = '''
+    SELECT v.*, b.name_en, b.name_ml 
+    FROM verses v 
+    JOIN books b ON v.book_id = b.id 
+    WHERE v.book_id = ? 
+    ORDER BY RANDOM() 
+    LIMIT 1
+  ''';
 
   @override
   Future<Database> initializeDatabase() async {
     final databasePath = await getDatabasesPath();
-    final path = join(databasePath, "quotes.db");
-    // check db exist or not
+    final path = join(databasePath, _dbName);
+
     final exists = await databaseExists(path);
     if (!exists) {
-      // Check directory exists
       try {
         await Directory(dirname(path)).create(recursive: true);
       } catch (_) {}
-      //* copy from asset
+
       ByteData data = await rootBundle.load(url.join("assets", _dbName));
       List<int> bytes =
           data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
@@ -31,24 +46,26 @@ class SqlDatasourceimp extends SqlDatasource {
     } else {
       debugPrint("opening existing database");
     }
+
     return await openDatabase(path, readOnly: true);
   }
 
   @override
-  Future<List<QuotesDataModel>> fetchData() async {
+  Future<QuotesDataModel?> fetchData({int? bookId}) async {
     try {
       final db = await initializeDatabase();
-      const String query = _fetchQuery;
 
-      final List<Map<String, dynamic>> quotesData = await db.rawQuery(query);
+      final List<Map<String, dynamic>> quotesData = bookId != null
+          ? await db.rawQuery(_fetchByBookQuery, [bookId])
+          : await db.rawQuery(_fetchAllQuery);
 
       if (quotesData.isNotEmpty) {
-        return quotesData.map((e) => QuotesDataModel.fromMap(e)).toList();
+        return QuotesDataModel.fromMap(quotesData.first);
       }
-      return <QuotesDataModel>[];
+      return null;
     } catch (e, stack) {
       debugPrint("fetchData error: $e\n$stack");
-      return <QuotesDataModel>[];
+      return null;
     }
   }
 }

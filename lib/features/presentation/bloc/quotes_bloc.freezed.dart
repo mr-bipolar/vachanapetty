@@ -14,24 +14,62 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$QuotesEvent {
+  int? get bookId;
+
+  /// Create a copy of QuotesEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $QuotesEventCopyWith<QuotesEvent> get copyWith =>
+      _$QuotesEventCopyWithImpl<QuotesEvent>(this as QuotesEvent, _$identity);
+
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is QuotesEvent);
+        (other.runtimeType == runtimeType &&
+            other is QuotesEvent &&
+            (identical(other.bookId, bookId) || other.bookId == bookId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, bookId);
 
   @override
   String toString() {
-    return 'QuotesEvent()';
+    return 'QuotesEvent(bookId: $bookId)';
   }
 }
 
 /// @nodoc
-class $QuotesEventCopyWith<$Res> {
-  $QuotesEventCopyWith(QuotesEvent _, $Res Function(QuotesEvent) __);
+abstract mixin class $QuotesEventCopyWith<$Res> {
+  factory $QuotesEventCopyWith(
+          QuotesEvent value, $Res Function(QuotesEvent) _then) =
+      _$QuotesEventCopyWithImpl;
+  @useResult
+  $Res call({int? bookId});
+}
+
+/// @nodoc
+class _$QuotesEventCopyWithImpl<$Res> implements $QuotesEventCopyWith<$Res> {
+  _$QuotesEventCopyWithImpl(this._self, this._then);
+
+  final QuotesEvent _self;
+  final $Res Function(QuotesEvent) _then;
+
+  /// Create a copy of QuotesEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? bookId = freezed,
+  }) {
+    return _then(_self.copyWith(
+      bookId: freezed == bookId
+          ? _self.bookId
+          : bookId // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
 }
 
 /// Adds pattern-matching-related methods to [QuotesEvent].
@@ -50,16 +88,16 @@ extension QuotesEventPatterns on QuotesEvent {
 
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_FetchRandom value)? fetchRandom,
     TResult Function(_FetchAll value)? fetchAll,
+    TResult Function(_ChooseBook value)? chooseBook,
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
-      case _FetchRandom() when fetchRandom != null:
-        return fetchRandom(_that);
       case _FetchAll() when fetchAll != null:
         return fetchAll(_that);
+      case _ChooseBook() when chooseBook != null:
+        return chooseBook(_that);
       case _:
         return orElse();
     }
@@ -80,17 +118,15 @@ extension QuotesEventPatterns on QuotesEvent {
 
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_FetchRandom value) fetchRandom,
     required TResult Function(_FetchAll value) fetchAll,
+    required TResult Function(_ChooseBook value) chooseBook,
   }) {
     final _that = this;
     switch (_that) {
-      case _FetchRandom():
-        return fetchRandom(_that);
       case _FetchAll():
         return fetchAll(_that);
-      case _:
-        throw StateError('Unexpected subclass');
+      case _ChooseBook():
+        return chooseBook(_that);
     }
   }
 
@@ -108,15 +144,15 @@ extension QuotesEventPatterns on QuotesEvent {
 
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_FetchRandom value)? fetchRandom,
     TResult? Function(_FetchAll value)? fetchAll,
+    TResult? Function(_ChooseBook value)? chooseBook,
   }) {
     final _that = this;
     switch (_that) {
-      case _FetchRandom() when fetchRandom != null:
-        return fetchRandom(_that);
       case _FetchAll() when fetchAll != null:
         return fetchAll(_that);
+      case _ChooseBook() when chooseBook != null:
+        return chooseBook(_that);
       case _:
         return null;
     }
@@ -136,16 +172,16 @@ extension QuotesEventPatterns on QuotesEvent {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? fetchRandom,
-    TResult Function()? fetchAll,
+    TResult Function(int? bookId)? fetchAll,
+    TResult Function(int? bookId)? chooseBook,
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
-      case _FetchRandom() when fetchRandom != null:
-        return fetchRandom();
       case _FetchAll() when fetchAll != null:
-        return fetchAll();
+        return fetchAll(_that.bookId);
+      case _ChooseBook() when chooseBook != null:
+        return chooseBook(_that.bookId);
       case _:
         return orElse();
     }
@@ -166,17 +202,15 @@ extension QuotesEventPatterns on QuotesEvent {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() fetchRandom,
-    required TResult Function() fetchAll,
+    required TResult Function(int? bookId) fetchAll,
+    required TResult Function(int? bookId) chooseBook,
   }) {
     final _that = this;
     switch (_that) {
-      case _FetchRandom():
-        return fetchRandom();
       case _FetchAll():
-        return fetchAll();
-      case _:
-        throw StateError('Unexpected subclass');
+        return fetchAll(_that.bookId);
+      case _ChooseBook():
+        return chooseBook(_that.bookId);
     }
   }
 
@@ -194,15 +228,15 @@ extension QuotesEventPatterns on QuotesEvent {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? fetchRandom,
-    TResult? Function()? fetchAll,
+    TResult? Function(int? bookId)? fetchAll,
+    TResult? Function(int? bookId)? chooseBook,
   }) {
     final _that = this;
     switch (_that) {
-      case _FetchRandom() when fetchRandom != null:
-        return fetchRandom();
       case _FetchAll() when fetchAll != null:
-        return fetchAll();
+        return fetchAll(_that.bookId);
+      case _ChooseBook() when chooseBook != null:
+        return chooseBook(_that.bookId);
       case _:
         return null;
     }
@@ -211,64 +245,224 @@ extension QuotesEventPatterns on QuotesEvent {
 
 /// @nodoc
 
-class _FetchRandom implements QuotesEvent {
-  const _FetchRandom();
+class _FetchAll implements QuotesEvent {
+  const _FetchAll({this.bookId});
+
+  @override
+  final int? bookId;
+
+  /// Create a copy of QuotesEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$FetchAllCopyWith<_FetchAll> get copyWith =>
+      __$FetchAllCopyWithImpl<_FetchAll>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _FetchRandom);
+        (other.runtimeType == runtimeType &&
+            other is _FetchAll &&
+            (identical(other.bookId, bookId) || other.bookId == bookId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, bookId);
 
   @override
   String toString() {
-    return 'QuotesEvent.fetchRandom()';
+    return 'QuotesEvent.fetchAll(bookId: $bookId)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$FetchAllCopyWith<$Res>
+    implements $QuotesEventCopyWith<$Res> {
+  factory _$FetchAllCopyWith(_FetchAll value, $Res Function(_FetchAll) _then) =
+      __$FetchAllCopyWithImpl;
+  @override
+  @useResult
+  $Res call({int? bookId});
+}
+
+/// @nodoc
+class __$FetchAllCopyWithImpl<$Res> implements _$FetchAllCopyWith<$Res> {
+  __$FetchAllCopyWithImpl(this._self, this._then);
+
+  final _FetchAll _self;
+  final $Res Function(_FetchAll) _then;
+
+  /// Create a copy of QuotesEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? bookId = freezed,
+  }) {
+    return _then(_FetchAll(
+      bookId: freezed == bookId
+          ? _self.bookId
+          : bookId // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
   }
 }
 
 /// @nodoc
 
-class _FetchAll implements QuotesEvent {
-  const _FetchAll();
+class _ChooseBook implements QuotesEvent {
+  const _ChooseBook({this.bookId});
+
+  @override
+  final int? bookId;
+
+  /// Create a copy of QuotesEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ChooseBookCopyWith<_ChooseBook> get copyWith =>
+      __$ChooseBookCopyWithImpl<_ChooseBook>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _FetchAll);
+        (other.runtimeType == runtimeType &&
+            other is _ChooseBook &&
+            (identical(other.bookId, bookId) || other.bookId == bookId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, bookId);
 
   @override
   String toString() {
-    return 'QuotesEvent.fetchAll()';
+    return 'QuotesEvent.chooseBook(bookId: $bookId)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$ChooseBookCopyWith<$Res>
+    implements $QuotesEventCopyWith<$Res> {
+  factory _$ChooseBookCopyWith(
+          _ChooseBook value, $Res Function(_ChooseBook) _then) =
+      __$ChooseBookCopyWithImpl;
+  @override
+  @useResult
+  $Res call({int? bookId});
+}
+
+/// @nodoc
+class __$ChooseBookCopyWithImpl<$Res> implements _$ChooseBookCopyWith<$Res> {
+  __$ChooseBookCopyWithImpl(this._self, this._then);
+
+  final _ChooseBook _self;
+  final $Res Function(_ChooseBook) _then;
+
+  /// Create a copy of QuotesEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? bookId = freezed,
+  }) {
+    return _then(_ChooseBook(
+      bookId: freezed == bookId
+          ? _self.bookId
+          : bookId // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
   }
 }
 
 /// @nodoc
 mixin _$QuotesState {
+  bool get isLoading;
+  int get selectedBookId;
+  QuotesDataEntity? get quotesData;
+  String? get message;
+
+  /// Create a copy of QuotesState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $QuotesStateCopyWith<QuotesState> get copyWith =>
+      _$QuotesStateCopyWithImpl<QuotesState>(this as QuotesState, _$identity);
+
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is QuotesState);
+        (other.runtimeType == runtimeType &&
+            other is QuotesState &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.selectedBookId, selectedBookId) ||
+                other.selectedBookId == selectedBookId) &&
+            (identical(other.quotesData, quotesData) ||
+                other.quotesData == quotesData) &&
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, isLoading, selectedBookId, quotesData, message);
 
   @override
   String toString() {
-    return 'QuotesState()';
+    return 'QuotesState(isLoading: $isLoading, selectedBookId: $selectedBookId, quotesData: $quotesData, message: $message)';
   }
 }
 
 /// @nodoc
-class $QuotesStateCopyWith<$Res> {
-  $QuotesStateCopyWith(QuotesState _, $Res Function(QuotesState) __);
+abstract mixin class $QuotesStateCopyWith<$Res> {
+  factory $QuotesStateCopyWith(
+          QuotesState value, $Res Function(QuotesState) _then) =
+      _$QuotesStateCopyWithImpl;
+  @useResult
+  $Res call(
+      {bool isLoading,
+      int selectedBookId,
+      QuotesDataEntity? quotesData,
+      String? message});
+}
+
+/// @nodoc
+class _$QuotesStateCopyWithImpl<$Res> implements $QuotesStateCopyWith<$Res> {
+  _$QuotesStateCopyWithImpl(this._self, this._then);
+
+  final QuotesState _self;
+  final $Res Function(QuotesState) _then;
+
+  /// Create a copy of QuotesState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isLoading = null,
+    Object? selectedBookId = null,
+    Object? quotesData = freezed,
+    Object? message = freezed,
+  }) {
+    return _then(_self.copyWith(
+      isLoading: null == isLoading
+          ? _self.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      selectedBookId: null == selectedBookId
+          ? _self.selectedBookId
+          : selectedBookId // ignore: cast_nullable_to_non_nullable
+              as int,
+      quotesData: freezed == quotesData
+          ? _self.quotesData
+          : quotesData // ignore: cast_nullable_to_non_nullable
+              as QuotesDataEntity?,
+      message: freezed == message
+          ? _self.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
 /// Adds pattern-matching-related methods to [QuotesState].
@@ -286,26 +480,14 @@ extension QuotesStatePatterns on QuotesState {
   /// ```
 
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(JumpToIndex value)? jumpToIndex,
-    TResult Function(AllQuotesData value)? fetch,
-    TResult Function(Error value)? error,
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_QuotesState value)? $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
-      case _initial() when initial != null:
-        return initial(_that);
-      case Loading() when loading != null:
-        return loading(_that);
-      case JumpToIndex() when jumpToIndex != null:
-        return jumpToIndex(_that);
-      case AllQuotesData() when fetch != null:
-        return fetch(_that);
-      case Error() when error != null:
-        return error(_that);
+      case _QuotesState() when $default != null:
+        return $default(_that);
       case _:
         return orElse();
     }
@@ -325,25 +507,13 @@ extension QuotesStatePatterns on QuotesState {
   /// ```
 
   @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_initial value) initial,
-    required TResult Function(Loading value) loading,
-    required TResult Function(JumpToIndex value) jumpToIndex,
-    required TResult Function(AllQuotesData value) fetch,
-    required TResult Function(Error value) error,
-  }) {
+  TResult map<TResult extends Object?>(
+    TResult Function(_QuotesState value) $default,
+  ) {
     final _that = this;
     switch (_that) {
-      case _initial():
-        return initial(_that);
-      case Loading():
-        return loading(_that);
-      case JumpToIndex():
-        return jumpToIndex(_that);
-      case AllQuotesData():
-        return fetch(_that);
-      case Error():
-        return error(_that);
+      case _QuotesState():
+        return $default(_that);
     }
   }
 
@@ -360,25 +530,13 @@ extension QuotesStatePatterns on QuotesState {
   /// ```
 
   @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initial value)? initial,
-    TResult? Function(Loading value)? loading,
-    TResult? Function(JumpToIndex value)? jumpToIndex,
-    TResult? Function(AllQuotesData value)? fetch,
-    TResult? Function(Error value)? error,
-  }) {
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_QuotesState value)? $default,
+  ) {
     final _that = this;
     switch (_that) {
-      case _initial() when initial != null:
-        return initial(_that);
-      case Loading() when loading != null:
-        return loading(_that);
-      case JumpToIndex() when jumpToIndex != null:
-        return jumpToIndex(_that);
-      case AllQuotesData() when fetch != null:
-        return fetch(_that);
-      case Error() when error != null:
-        return error(_that);
+      case _QuotesState() when $default != null:
+        return $default(_that);
       case _:
         return null;
     }
@@ -397,27 +555,17 @@ extension QuotesStatePatterns on QuotesState {
   /// ```
 
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(int? index)? jumpToIndex,
-    TResult Function(List<QuotesDataEntity> quotesData, int? jumpToIndex)?
-        fetch,
-    TResult Function(String? message)? error,
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(bool isLoading, int selectedBookId,
+            QuotesDataEntity? quotesData, String? message)?
+        $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
-      case _initial() when initial != null:
-        return initial();
-      case Loading() when loading != null:
-        return loading();
-      case JumpToIndex() when jumpToIndex != null:
-        return jumpToIndex(_that.index);
-      case AllQuotesData() when fetch != null:
-        return fetch(_that.quotesData, _that.jumpToIndex);
-      case Error() when error != null:
-        return error(_that.message);
+      case _QuotesState() when $default != null:
+        return $default(_that.isLoading, _that.selectedBookId, _that.quotesData,
+            _that.message);
       case _:
         return orElse();
     }
@@ -437,27 +585,16 @@ extension QuotesStatePatterns on QuotesState {
   /// ```
 
   @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(int? index) jumpToIndex,
-    required TResult Function(
-            List<QuotesDataEntity> quotesData, int? jumpToIndex)
-        fetch,
-    required TResult Function(String? message) error,
-  }) {
+  TResult when<TResult extends Object?>(
+    TResult Function(bool isLoading, int selectedBookId,
+            QuotesDataEntity? quotesData, String? message)
+        $default,
+  ) {
     final _that = this;
     switch (_that) {
-      case _initial():
-        return initial();
-      case Loading():
-        return loading();
-      case JumpToIndex():
-        return jumpToIndex(_that.index);
-      case AllQuotesData():
-        return fetch(_that.quotesData, _that.jumpToIndex);
-      case Error():
-        return error(_that.message);
+      case _QuotesState():
+        return $default(_that.isLoading, _that.selectedBookId, _that.quotesData,
+            _that.message);
     }
   }
 
@@ -474,26 +611,16 @@ extension QuotesStatePatterns on QuotesState {
   /// ```
 
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(int? index)? jumpToIndex,
-    TResult? Function(List<QuotesDataEntity> quotesData, int? jumpToIndex)?
-        fetch,
-    TResult? Function(String? message)? error,
-  }) {
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(bool isLoading, int selectedBookId,
+            QuotesDataEntity? quotesData, String? message)?
+        $default,
+  ) {
     final _that = this;
     switch (_that) {
-      case _initial() when initial != null:
-        return initial();
-      case Loading() when loading != null:
-        return loading();
-      case JumpToIndex() when jumpToIndex != null:
-        return jumpToIndex(_that.index);
-      case AllQuotesData() when fetch != null:
-        return fetch(_that.quotesData, _that.jumpToIndex);
-      case Error() when error != null:
-        return error(_that.message);
+      case _QuotesState() when $default != null:
+        return $default(_that.isLoading, _that.selectedBookId, _that.quotesData,
+            _that.message);
       case _:
         return null;
     }
@@ -502,243 +629,102 @@ extension QuotesStatePatterns on QuotesState {
 
 /// @nodoc
 
-class _initial implements QuotesState {
-  const _initial();
+class _QuotesState implements QuotesState {
+  const _QuotesState(
+      {this.isLoading = false,
+      this.selectedBookId = 0,
+      this.quotesData = null,
+      this.message});
 
   @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _initial);
-  }
-
+  @JsonKey()
+  final bool isLoading;
   @override
-  int get hashCode => runtimeType.hashCode;
-
+  @JsonKey()
+  final int selectedBookId;
   @override
-  String toString() {
-    return 'QuotesState.initial()';
-  }
-}
-
-/// @nodoc
-
-class Loading implements QuotesState {
-  const Loading();
-
+  @JsonKey()
+  final QuotesDataEntity? quotesData;
   @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is Loading);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  String toString() {
-    return 'QuotesState.loading()';
-  }
-}
-
-/// @nodoc
-
-class JumpToIndex implements QuotesState {
-  const JumpToIndex({this.index});
-
-  final int? index;
-
-  /// Create a copy of QuotesState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $JumpToIndexCopyWith<JumpToIndex> get copyWith =>
-      _$JumpToIndexCopyWithImpl<JumpToIndex>(this, _$identity);
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is JumpToIndex &&
-            (identical(other.index, index) || other.index == index));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, index);
-
-  @override
-  String toString() {
-    return 'QuotesState.jumpToIndex(index: $index)';
-  }
-}
-
-/// @nodoc
-abstract mixin class $JumpToIndexCopyWith<$Res>
-    implements $QuotesStateCopyWith<$Res> {
-  factory $JumpToIndexCopyWith(
-          JumpToIndex value, $Res Function(JumpToIndex) _then) =
-      _$JumpToIndexCopyWithImpl;
-  @useResult
-  $Res call({int? index});
-}
-
-/// @nodoc
-class _$JumpToIndexCopyWithImpl<$Res> implements $JumpToIndexCopyWith<$Res> {
-  _$JumpToIndexCopyWithImpl(this._self, this._then);
-
-  final JumpToIndex _self;
-  final $Res Function(JumpToIndex) _then;
-
-  /// Create a copy of QuotesState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? index = freezed,
-  }) {
-    return _then(JumpToIndex(
-      index: freezed == index
-          ? _self.index
-          : index // ignore: cast_nullable_to_non_nullable
-              as int?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class AllQuotesData implements QuotesState {
-  const AllQuotesData(
-      {required final List<QuotesDataEntity> quotesData, this.jumpToIndex})
-      : _quotesData = quotesData;
-
-  final List<QuotesDataEntity> _quotesData;
-  List<QuotesDataEntity> get quotesData {
-    if (_quotesData is EqualUnmodifiableListView) return _quotesData;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_quotesData);
-  }
-
-  final int? jumpToIndex;
-
-  /// Create a copy of QuotesState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $AllQuotesDataCopyWith<AllQuotesData> get copyWith =>
-      _$AllQuotesDataCopyWithImpl<AllQuotesData>(this, _$identity);
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is AllQuotesData &&
-            const DeepCollectionEquality()
-                .equals(other._quotesData, _quotesData) &&
-            (identical(other.jumpToIndex, jumpToIndex) ||
-                other.jumpToIndex == jumpToIndex));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_quotesData), jumpToIndex);
-
-  @override
-  String toString() {
-    return 'QuotesState.fetch(quotesData: $quotesData, jumpToIndex: $jumpToIndex)';
-  }
-}
-
-/// @nodoc
-abstract mixin class $AllQuotesDataCopyWith<$Res>
-    implements $QuotesStateCopyWith<$Res> {
-  factory $AllQuotesDataCopyWith(
-          AllQuotesData value, $Res Function(AllQuotesData) _then) =
-      _$AllQuotesDataCopyWithImpl;
-  @useResult
-  $Res call({List<QuotesDataEntity> quotesData, int? jumpToIndex});
-}
-
-/// @nodoc
-class _$AllQuotesDataCopyWithImpl<$Res>
-    implements $AllQuotesDataCopyWith<$Res> {
-  _$AllQuotesDataCopyWithImpl(this._self, this._then);
-
-  final AllQuotesData _self;
-  final $Res Function(AllQuotesData) _then;
-
-  /// Create a copy of QuotesState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? quotesData = null,
-    Object? jumpToIndex = freezed,
-  }) {
-    return _then(AllQuotesData(
-      quotesData: null == quotesData
-          ? _self._quotesData
-          : quotesData // ignore: cast_nullable_to_non_nullable
-              as List<QuotesDataEntity>,
-      jumpToIndex: freezed == jumpToIndex
-          ? _self.jumpToIndex
-          : jumpToIndex // ignore: cast_nullable_to_non_nullable
-              as int?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class Error implements QuotesState {
-  const Error({this.message});
-
   final String? message;
 
   /// Create a copy of QuotesState
   /// with the given fields replaced by the non-null parameter values.
+  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $ErrorCopyWith<Error> get copyWith =>
-      _$ErrorCopyWithImpl<Error>(this, _$identity);
+  _$QuotesStateCopyWith<_QuotesState> get copyWith =>
+      __$QuotesStateCopyWithImpl<_QuotesState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is Error &&
+            other is _QuotesState &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.selectedBookId, selectedBookId) ||
+                other.selectedBookId == selectedBookId) &&
+            (identical(other.quotesData, quotesData) ||
+                other.quotesData == quotesData) &&
             (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message);
+  int get hashCode =>
+      Object.hash(runtimeType, isLoading, selectedBookId, quotesData, message);
 
   @override
   String toString() {
-    return 'QuotesState.error(message: $message)';
+    return 'QuotesState(isLoading: $isLoading, selectedBookId: $selectedBookId, quotesData: $quotesData, message: $message)';
   }
 }
 
 /// @nodoc
-abstract mixin class $ErrorCopyWith<$Res>
+abstract mixin class _$QuotesStateCopyWith<$Res>
     implements $QuotesStateCopyWith<$Res> {
-  factory $ErrorCopyWith(Error value, $Res Function(Error) _then) =
-      _$ErrorCopyWithImpl;
+  factory _$QuotesStateCopyWith(
+          _QuotesState value, $Res Function(_QuotesState) _then) =
+      __$QuotesStateCopyWithImpl;
+  @override
   @useResult
-  $Res call({String? message});
+  $Res call(
+      {bool isLoading,
+      int selectedBookId,
+      QuotesDataEntity? quotesData,
+      String? message});
 }
 
 /// @nodoc
-class _$ErrorCopyWithImpl<$Res> implements $ErrorCopyWith<$Res> {
-  _$ErrorCopyWithImpl(this._self, this._then);
+class __$QuotesStateCopyWithImpl<$Res> implements _$QuotesStateCopyWith<$Res> {
+  __$QuotesStateCopyWithImpl(this._self, this._then);
 
-  final Error _self;
-  final $Res Function(Error) _then;
+  final _QuotesState _self;
+  final $Res Function(_QuotesState) _then;
 
   /// Create a copy of QuotesState
   /// with the given fields replaced by the non-null parameter values.
+  @override
   @pragma('vm:prefer-inline')
   $Res call({
+    Object? isLoading = null,
+    Object? selectedBookId = null,
+    Object? quotesData = freezed,
     Object? message = freezed,
   }) {
-    return _then(Error(
+    return _then(_QuotesState(
+      isLoading: null == isLoading
+          ? _self.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      selectedBookId: null == selectedBookId
+          ? _self.selectedBookId
+          : selectedBookId // ignore: cast_nullable_to_non_nullable
+              as int,
+      quotesData: freezed == quotesData
+          ? _self.quotesData
+          : quotesData // ignore: cast_nullable_to_non_nullable
+              as QuotesDataEntity?,
       message: freezed == message
           ? _self.message
           : message // ignore: cast_nullable_to_non_nullable

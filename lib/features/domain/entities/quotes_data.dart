@@ -1,23 +1,19 @@
 class QuotesDataEntity {
-  final int? id;
-  final String chapter;
-  final String verses;
+// from verses table
+  final int id;
+  final int bookId;
+  final String verseNumber;
+  final String quoteMl;
 
-  QuotesDataEntity({
-    this.id,
-    required this.chapter,
-    required this.verses,
-  });
+  // from books table
+  final String nameEn;
+  final String nameMl;
 
-  String get chapterName {
-    final index = chapter.indexOf('[');
-    return index == -1 ? chapter.trim() : chapter.substring(0, index).trim();
-  }
-
-  String get chapterVerseRef {
-    final match = RegExp(r'\[\s*(\d+)\s*:\s*(\d+)\s*\]').firstMatch(chapter);
-
-    if (match == null) return '';
-    return '${match.group(1)} : ${match.group(2)}';
-  }
+  QuotesDataEntity(
+      {required this.id,
+      required this.bookId,
+      required this.verseNumber,
+      required this.quoteMl,
+      required this.nameEn,
+      required this.nameMl});
 }

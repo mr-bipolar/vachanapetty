@@ -6,23 +6,41 @@ part 'quotes_datamodel.freezed.dart';
 @freezed
 abstract class QuotesDataModel with _$QuotesDataModel {
   factory QuotesDataModel({
-    int? id,
-    required final String chapter,
-    required final String verses,
+    // from verses table
+    required final int id,
+    required final int bookId,
+    required final String verseNumber,
+    required final String quoteMl,
+
+    // from books table
+    required final String nameEn,
+    required final String nameMl,
   }) = _QuotesDataModel;
 
   factory QuotesDataModel.fromMap(Map<String, dynamic> map) {
-    final id = map['id'] as int?;
-    final chapter = map['chapter'] as String;
-    final verses = map['verses'] as String;
-    return QuotesDataModel(id: id, chapter: chapter, verses: verses);
+    final id = map['id'] as int;
+    final bookId = map['book_id'] as int;
+    final verseNumber = map['verse_number'] as String;
+    final quoteMl = map['quote_ml'] as String;
+    final nameEn = map['name_en'] as String;
+    final nameMl = map['name_ml'] as String;
+    return QuotesDataModel(
+      id: id,
+      bookId: bookId,
+      verseNumber: verseNumber,
+      quoteMl: quoteMl,
+      nameEn: nameEn,
+      nameMl: nameMl,
+    );
   }
 }
 
 extension QuotesDataModelX on QuotesDataModel {
   QuotesDataEntity toEntity() => QuotesDataEntity(
-        id: id,
-        chapter: chapter,
-        verses: verses,
-      );
+      id: id,
+      bookId: bookId,
+      verseNumber: verseNumber,
+      quoteMl: quoteMl,
+      nameEn: nameEn,
+      nameMl: nameMl);
 }

@@ -14,9 +14,13 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$QuotesDataModel {
-  int? get id;
-  String get chapter;
-  String get verses;
+// from verses table
+  int get id;
+  int get bookId;
+  String get verseNumber;
+  String get quoteMl; // from books table
+  String get nameEn;
+  String get nameMl;
 
   /// Create a copy of QuotesDataModel
   /// with the given fields replaced by the non-null parameter values.
@@ -32,16 +36,21 @@ mixin _$QuotesDataModel {
         (other.runtimeType == runtimeType &&
             other is QuotesDataModel &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.chapter, chapter) || other.chapter == chapter) &&
-            (identical(other.verses, verses) || other.verses == verses));
+            (identical(other.bookId, bookId) || other.bookId == bookId) &&
+            (identical(other.verseNumber, verseNumber) ||
+                other.verseNumber == verseNumber) &&
+            (identical(other.quoteMl, quoteMl) || other.quoteMl == quoteMl) &&
+            (identical(other.nameEn, nameEn) || other.nameEn == nameEn) &&
+            (identical(other.nameMl, nameMl) || other.nameMl == nameMl));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, chapter, verses);
+  int get hashCode => Object.hash(
+      runtimeType, id, bookId, verseNumber, quoteMl, nameEn, nameMl);
 
   @override
   String toString() {
-    return 'QuotesDataModel(id: $id, chapter: $chapter, verses: $verses)';
+    return 'QuotesDataModel(id: $id, bookId: $bookId, verseNumber: $verseNumber, quoteMl: $quoteMl, nameEn: $nameEn, nameMl: $nameMl)';
   }
 }
 
@@ -51,7 +60,13 @@ abstract mixin class $QuotesDataModelCopyWith<$Res> {
           QuotesDataModel value, $Res Function(QuotesDataModel) _then) =
       _$QuotesDataModelCopyWithImpl;
   @useResult
-  $Res call({int? id, String chapter, String verses});
+  $Res call(
+      {int id,
+      int bookId,
+      String verseNumber,
+      String quoteMl,
+      String nameEn,
+      String nameMl});
 }
 
 /// @nodoc
@@ -67,22 +82,37 @@ class _$QuotesDataModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? chapter = null,
-    Object? verses = null,
+    Object? id = null,
+    Object? bookId = null,
+    Object? verseNumber = null,
+    Object? quoteMl = null,
+    Object? nameEn = null,
+    Object? nameMl = null,
   }) {
     return _then(_self.copyWith(
-      id: freezed == id
+      id: null == id
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      chapter: null == chapter
-          ? _self.chapter
-          : chapter // ignore: cast_nullable_to_non_nullable
+              as int,
+      bookId: null == bookId
+          ? _self.bookId
+          : bookId // ignore: cast_nullable_to_non_nullable
+              as int,
+      verseNumber: null == verseNumber
+          ? _self.verseNumber
+          : verseNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      verses: null == verses
-          ? _self.verses
-          : verses // ignore: cast_nullable_to_non_nullable
+      quoteMl: null == quoteMl
+          ? _self.quoteMl
+          : quoteMl // ignore: cast_nullable_to_non_nullable
+              as String,
+      nameEn: null == nameEn
+          ? _self.nameEn
+          : nameEn // ignore: cast_nullable_to_non_nullable
+              as String,
+      nameMl: null == nameMl
+          ? _self.nameMl
+          : nameMl // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -181,13 +211,16 @@ extension QuotesDataModelPatterns on QuotesDataModel {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(int? id, String chapter, String verses)? $default, {
+    TResult Function(int id, int bookId, String verseNumber, String quoteMl,
+            String nameEn, String nameMl)?
+        $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
       case _QuotesDataModel() when $default != null:
-        return $default(_that.id, _that.chapter, _that.verses);
+        return $default(_that.id, _that.bookId, _that.verseNumber,
+            _that.quoteMl, _that.nameEn, _that.nameMl);
       case _:
         return orElse();
     }
@@ -208,12 +241,15 @@ extension QuotesDataModelPatterns on QuotesDataModel {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(int? id, String chapter, String verses) $default,
+    TResult Function(int id, int bookId, String verseNumber, String quoteMl,
+            String nameEn, String nameMl)
+        $default,
   ) {
     final _that = this;
     switch (_that) {
       case _QuotesDataModel():
-        return $default(_that.id, _that.chapter, _that.verses);
+        return $default(_that.id, _that.bookId, _that.verseNumber,
+            _that.quoteMl, _that.nameEn, _that.nameMl);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -233,12 +269,15 @@ extension QuotesDataModelPatterns on QuotesDataModel {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(int? id, String chapter, String verses)? $default,
+    TResult? Function(int id, int bookId, String verseNumber, String quoteMl,
+            String nameEn, String nameMl)?
+        $default,
   ) {
     final _that = this;
     switch (_that) {
       case _QuotesDataModel() when $default != null:
-        return $default(_that.id, _that.chapter, _that.verses);
+        return $default(_that.id, _that.bookId, _that.verseNumber,
+            _that.quoteMl, _that.nameEn, _that.nameMl);
       case _:
         return null;
     }
@@ -248,14 +287,28 @@ extension QuotesDataModelPatterns on QuotesDataModel {
 /// @nodoc
 
 class _QuotesDataModel implements QuotesDataModel {
-  _QuotesDataModel({this.id, required this.chapter, required this.verses});
+  _QuotesDataModel(
+      {required this.id,
+      required this.bookId,
+      required this.verseNumber,
+      required this.quoteMl,
+      required this.nameEn,
+      required this.nameMl});
 
+// from verses table
   @override
-  final int? id;
+  final int id;
   @override
-  final String chapter;
+  final int bookId;
   @override
-  final String verses;
+  final String verseNumber;
+  @override
+  final String quoteMl;
+// from books table
+  @override
+  final String nameEn;
+  @override
+  final String nameMl;
 
   /// Create a copy of QuotesDataModel
   /// with the given fields replaced by the non-null parameter values.
@@ -271,16 +324,21 @@ class _QuotesDataModel implements QuotesDataModel {
         (other.runtimeType == runtimeType &&
             other is _QuotesDataModel &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.chapter, chapter) || other.chapter == chapter) &&
-            (identical(other.verses, verses) || other.verses == verses));
+            (identical(other.bookId, bookId) || other.bookId == bookId) &&
+            (identical(other.verseNumber, verseNumber) ||
+                other.verseNumber == verseNumber) &&
+            (identical(other.quoteMl, quoteMl) || other.quoteMl == quoteMl) &&
+            (identical(other.nameEn, nameEn) || other.nameEn == nameEn) &&
+            (identical(other.nameMl, nameMl) || other.nameMl == nameMl));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, chapter, verses);
+  int get hashCode => Object.hash(
+      runtimeType, id, bookId, verseNumber, quoteMl, nameEn, nameMl);
 
   @override
   String toString() {
-    return 'QuotesDataModel(id: $id, chapter: $chapter, verses: $verses)';
+    return 'QuotesDataModel(id: $id, bookId: $bookId, verseNumber: $verseNumber, quoteMl: $quoteMl, nameEn: $nameEn, nameMl: $nameMl)';
   }
 }
 
@@ -292,7 +350,13 @@ abstract mixin class _$QuotesDataModelCopyWith<$Res>
       __$QuotesDataModelCopyWithImpl;
   @override
   @useResult
-  $Res call({int? id, String chapter, String verses});
+  $Res call(
+      {int id,
+      int bookId,
+      String verseNumber,
+      String quoteMl,
+      String nameEn,
+      String nameMl});
 }
 
 /// @nodoc
@@ -308,22 +372,37 @@ class __$QuotesDataModelCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? id = freezed,
-    Object? chapter = null,
-    Object? verses = null,
+    Object? id = null,
+    Object? bookId = null,
+    Object? verseNumber = null,
+    Object? quoteMl = null,
+    Object? nameEn = null,
+    Object? nameMl = null,
   }) {
     return _then(_QuotesDataModel(
-      id: freezed == id
+      id: null == id
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      chapter: null == chapter
-          ? _self.chapter
-          : chapter // ignore: cast_nullable_to_non_nullable
+              as int,
+      bookId: null == bookId
+          ? _self.bookId
+          : bookId // ignore: cast_nullable_to_non_nullable
+              as int,
+      verseNumber: null == verseNumber
+          ? _self.verseNumber
+          : verseNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      verses: null == verses
-          ? _self.verses
-          : verses // ignore: cast_nullable_to_non_nullable
+      quoteMl: null == quoteMl
+          ? _self.quoteMl
+          : quoteMl // ignore: cast_nullable_to_non_nullable
+              as String,
+      nameEn: null == nameEn
+          ? _self.nameEn
+          : nameEn // ignore: cast_nullable_to_non_nullable
+              as String,
+      nameMl: null == nameMl
+          ? _self.nameMl
+          : nameMl // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }

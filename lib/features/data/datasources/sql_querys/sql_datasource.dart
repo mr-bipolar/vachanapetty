@@ -3,5 +3,5 @@ import 'package:vachanapetty/features/data/models/quotes_datamodel.dart';
 
 abstract class SqlDatasource {
   Future<Database> initializeDatabase();
-  Future<List<QuotesDataModel>> fetchData();
+  Future<QuotesDataModel?> fetchData({int? bookId});
 }

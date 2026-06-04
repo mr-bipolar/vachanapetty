@@ -7,6 +7,6 @@ class GetAllData {
   final SqlRepository _repository;
 
   GetAllData({required SqlRepository repository}) : _repository = repository;
-  Future<Either<Failures, List<QuotesDataEntity>>> call() async =>
-      await _repository.fetchData();
+  Future<Either<Failures, QuotesDataEntity>> call({int? bookId}) async =>
+      await _repository.fetchData(bookId: bookId);
 }
